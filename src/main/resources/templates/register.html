@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Bookstore Registration</title>
+</head>
+
+<body>
+
+<h1>Create Bookstore Account</h1>
+
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+<form th:action="@{/register}" th:object="${user}" method="post">
+
+    <label>Full Name</label><br>
+    <input type="text"
+           th:field="*{fullName}"
+           required>
+
+    <br><br>
+
+    <label>Email</label><br>
+    <input type="email"
+           th:field="*{email}"
+           required>
+
+    <br><br>
+
+    <label>Password</label><br>
+    <input type="password"
+           th:field="*{password}"
+           required>
+
+    <br><br>
+
+    <label>Phone</label><br>
+    <input type="text"
+           th:field="*{phone}">
+
+    <br><br>
+
+    <label>Address</label><br>
+    <textarea th:field="*{address}"></textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Register
+    </button>
+
+</form>
+
+<br>
+
+<a th:href="@{/login}">
+    Already have an account? Login
+</a>
+
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Geetanjali Bookstore</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ddd;
+        }
+
+        h1 {
+            color: #343a40;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .menu {
+            margin-top: 30px;
+        }
+
+        .menu a {
+            display: inline-block;
+            padding: 12px 20px;
+            margin: 8px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .menu a:hover {
+            background-color: #0056b3;
+        }
+
+        .cart {
+            background-color: #28a745 !important;
+        }
+
+        .orders {
+            background-color: #6f42c1 !important;
+        }
+
+        .admin {
+            background-color: #343a40 !important;
+        }
+
+        .checkout {
+            background-color: #fd7e14 !important;
+        }
+
+        .logout {
+            margin-top: 30px;
+        }
+
+        .logout button {
+            padding: 10px 25px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .logout button:hover {
+            background-color: #b02a37;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📚 Welcome to Geetanjali Bookstore</h1>
+
+    <p>
+        Your Online Bookstore Management System
+    </p>
+
+    <hr>
+
+    <div class="menu">
+
+        <!-- Books -->
+        <a th:href="@{/books}">
+            📖 Browse Books
+        </a>
+
+        <!-- Add Book -->
+        <a th:href="@{/books/add}">
+            ➕ Add New Book
+        </a>
+
+        <!-- Authors -->
+        <a th:href="@{/authors}">
+            ✍ Authors
+        </a>
+
+        <!-- Categories -->
+        <a th:href="@{/categories}">
+            🏷 Categories
+        </a>
+
+        <!-- Cart -->
+        <a class="cart"
+           th:href="@{/cart}">
+            🛒 Shopping Cart
+        </a>
+
+        <!-- Checkout -->
+        <a class="checkout"
+           th:href="@{/checkout}">
+            💳 Checkout
+        </a>
+
+        <!-- Orders -->
+        <a class="orders"
+           th:href="@{/orders}">
+            📦 My Orders
+        </a>
+
+        <!-- Admin -->
+        <a class="admin"
+           th:href="@{/admin}">
+            👨‍💼 Admin Dashboard
+        </a>
+
+        <a th:href="@{/admin/orders}">
+            📋 Manage Orders
+        </a>
+
+    </div>
+
+    <hr>
+
+    <div class="logout">
+
+        <form th:action="@{/logout}" method="post">
+
+            <button type="submit">
+                Logout
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

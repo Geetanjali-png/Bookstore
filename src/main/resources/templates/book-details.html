@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Book Details - Geetanjali Bookstore</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f5f5;
+        }
+
+        .container {
+            width: 75%;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            color: #343a40;
+        }
+
+        .details {
+            line-height: 2;
+            font-size: 18px;
+        }
+
+        .image {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .image img {
+            max-width: 250px;
+            max-height: 350px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 18px;
+            margin: 5px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .cart {
+            background: #28a745;
+        }
+
+        .books {
+            background: #007bff;
+        }
+
+        .home {
+            background: #343a40;
+        }
+
+        .review-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        input, select, textarea {
+            padding: 10px;
+            margin-top: 5px;
+            width: 90%;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .submit {
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📖 Book Details</h1>
+
+    <!-- Book Image -->
+    <div class="image"
+         th:if="${book.imageUrl != null and !book.imageUrl.isEmpty()}">
+
+        <img th:src="${book.imageUrl}"
+             alt="Book Image">
+
+    </div>
+
+    <!-- Book Details -->
+    <div class="details">
+
+        <p>
+            <strong>Title:</strong>
+            <span th:text="${book.title}"></span>
+        </p>
+
+        <p>
+            <strong>Description:</strong>
+            <span th:text="${book.description}"></span>
+        </p>
+
+        <p>
+            <strong>Price:</strong>
+            ₹<span th:text="${book.price}"></span>
+        </p>
+
+        <p>
+            <strong>Stock:</strong>
+            <span th:text="${book.stock}"></span>
+        </p>
+
+        <p>
+            <strong>ISBN:</strong>
+            <span th:text="${book.isbn}"></span>
+        </p>
+
+        <p>
+            <strong>Author:</strong>
+            <span th:text="${book.author != null ? book.author.name : 'N/A'}"></span>
+        </p>
+
+        <p>
+            <strong>Category:</strong>
+            <span th:text="${book.category != null ? book.category.name : 'N/A'}"></span>
+        </p>
+
+        <p>
+            <strong>Available:</strong>
+            <span th:text="${book.available ? 'Yes' : 'No'}"></span>
+        </p>
+
+    </div>
+
+    <!-- Cart -->
+    <div>
+
+        <a class="button cart"
+           th:if="${book.available and book.stock > 0}"
+           th:href="@{/cart/add/{id}(id=${book.id})}">
+            🛒 Add to Cart
+        </a>
+
+        <span th:if="${!book.available or book.stock <= 0}">
+            Currently Unavailable
+        </span>
+
+    </div>
+
+    <hr>
+
+    <!-- Reviews -->
+    <div class="review-box">
+
+        <h2>⭐ Reviews & Ratings</h2>
+
+        <form th:action="@{/reviews/add/{id}(id=${book.id})}"
+              method="post">
+
+            <label>
+                <strong>Your Name:</strong>
+            </label>
+
+            <br>
+
+            <input type="text"
+                   name="reviewerName"
+                   placeholder="Enter your name"
+                   required>
+
+            <br><br>
+
+            <label>
+                <strong>Rating:</strong>
+            </label>
+
+            <br>
+
+            <select name="rating" required>
+
+                <option value="5">
+                    ⭐⭐⭐⭐⭐
+                </option>
+
+                <option value="4">
+                    ⭐⭐⭐⭐
+                </option>
+
+                <option value="3">
+                    ⭐⭐⭐
+                </option>
+
+                <option value="2">
+                    ⭐⭐
+                </option>
+
+                <option value="1">
+                    ⭐
+                </option>
+
+            </select>
+
+            <br><br>
+
+            <label>
+                <strong>Comment:</strong>
+            </label>
+
+            <br>
+
+            <textarea name="comment"
+                      rows="5"
+                      placeholder="Write your review..."
+                      required></textarea>
+
+            <br><br>
+
+            <button type="submit"
+                    class="submit">
+                Submit Review
+            </button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <!-- Navigation -->
+
+    <a class="button books"
+       th:href="@{/books}">
+        ← Back to Books
+    </a>
+
+    <a class="button home"
+       th:href="@{/}">
+        🏠 Home
+    </a>
+
+</div>
+
+</body>
+
+</html>

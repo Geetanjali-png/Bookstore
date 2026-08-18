@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Checkout - Geetanjali Bookstore</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #343a40;
+            color: white;
+        }
+
+        .total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            text-align: right;
+            margin-top: 25px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 18px;
+            margin: 5px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back {
+            background: #6c757d;
+        }
+
+        .place {
+            background: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🛍 Checkout</h1>
+
+    <h2>Order Summary</h2>
+
+    <table>
+
+        <thead>
+        <tr>
+            <th>Book</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="item : ${cartItems}">
+
+            <td th:text="${item.title}"></td>
+
+            <td>
+                ₹<span th:text="${item.price}"></span>
+            </td>
+
+            <td th:text="${item.quantity}"></td>
+
+            <td>
+                ₹<span th:text="${item.total}"></span>
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+    <div class="total">
+        Order Total:
+        ₹<span th:text="${total}"></span>
+    </div>
+
+    <div class="buttons">
+
+        <a class="button back"
+           th:href="@{/cart}">
+            ← Back to Cart
+        </a>
+
+        <form th:action="@{/checkout/place}"
+              method="post"
+              style="display:inline;">
+
+            <button type="submit"
+                    class="button place">
+                Place Order
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

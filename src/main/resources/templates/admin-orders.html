@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Admin Orders - Geetanjali Bookstore</title>
+</head>
+
+<body>
+
+<h1>📦 Admin Order Management</h1>
+
+<table border="1">
+
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>Total Amount</th>
+        <th>Status</th>
+        <th>Update Status</th>
+        <th>View</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="order : ${orders}">
+
+        <td th:text="${order.id}"></td>
+
+        <td th:text="${order.orderDate}"></td>
+
+        <td>
+            ₹<span th:text="${order.totalAmount}"></span>
+        </td>
+
+        <td th:text="${order.status}"></td>
+
+        <td>
+
+            <form th:action="@{/admin/orders/status/{id}(id=${order.id})}"
+                  method="post">
+
+                <select name="status">
+
+                    <option value="PLACED"
+                            th:selected="${order.status == 'PLACED'}">
+                        Placed
+                    </option>
+
+                    <option value="PROCESSING"
+                            th:selected="${order.status == 'PROCESSING'}">
+                        Processing
+                    </option>
+
+                    <option value="SHIPPED"
+                            th:selected="${order.status == 'SHIPPED'}">
+                        Shipped
+                    </option>
+
+                    <option value="DELIVERED"
+                            th:selected="${order.status == 'DELIVERED'}">
+                        Delivered
+                    </option>
+
+                    <option value="CANCELLED"
+                            th:selected="${order.status == 'CANCELLED'}">
+                        Cancelled
+                    </option>
+
+                </select>
+
+                <button type="submit">
+                    Update
+                </button>
+
+            </form>
+
+        </td>
+
+        <td>
+
+            <a th:href="@{/orders/{id}(id=${order.id})}">
+                View Order
+            </a>
+
+        </td>
+
+    </tr>
+
+    </tbody>
+
+</table>
+
+<br>
+
+<a th:href="@{/admin}">
+    ← Admin Dashboard
+</a>
+
+<br><br>
+
+<a th:href="@{/}">
+    🏠 Home
+</a>
+
+</body>
+
+</html>
